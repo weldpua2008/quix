@@ -8,8 +8,8 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <scala.library.version>2.12.7</scala.library.version>
-        <scala.dependencies.version>2.12</scala.dependencies.version>
+        <scala.library.version>2.13.1</scala.library.version>
+        <scala.dependencies.version>2.13</scala.dependencies.version>
     </properties>
 
     <dependencies>
@@ -28,7 +28,7 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-athena</artifactId>
-            <version>1.11.568</version>
+            <version>1.11.664</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.typesafe.scala-logging/scala-logging -->
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>org.specs2</groupId>
             <artifactId>specs2-core_${scala.dependencies.version}</artifactId>
-            <version>4.5.1</version>
+            <version>4.8.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -58,7 +58,7 @@
         <dependency>
             <groupId>org.specs2</groupId>
             <artifactId>specs2-junit_${scala.dependencies.version}</artifactId>
-            <version>4.5.1</version>
+            <version>4.8.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -66,7 +66,7 @@
         <dependency>
             <groupId>org.specs2</groupId>
             <artifactId>specs2-mock_${scala.dependencies.version}</artifactId>
-            <version>4.5.1</version>
+            <version>4.8.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -79,7 +79,7 @@
                 <!-- https://mvnrepository.com/artifact/net.alchim31.maven/scala-maven-plugin -->
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>4.2.4</version>
                 <executions>
                     <execution>
                         <goals>

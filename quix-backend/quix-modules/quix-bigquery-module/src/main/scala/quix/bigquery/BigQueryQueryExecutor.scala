@@ -10,7 +10,7 @@ import monix.eval.Task
 import quix.api.execute._
 import quix.core.utils.TaskOps._
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import scala.concurrent.duration._
 
 class BigQueryQueryExecutor(val client: BigQueryClient, val advanceTimeout: Long)
@@ -19,7 +19,7 @@ class BigQueryQueryExecutor(val client: BigQueryClient, val advanceTimeout: Long
   def toBatch(job: Job, result: TableResult, rowsSoFar: Long): Batch = {
     val rows = for {
       row <- result.getValues.asScala.toSeq
-    } yield row.asScala.map(getValue)
+    } yield row.asScala.toSeq.map(getValue)
 
     val percentage = if (result.getTotalRows > 0) {
       ((rowsSoFar + rows.size).toDouble / result.getTotalRows * 100).toInt
@@ -32,7 +32,7 @@ class BigQueryQueryExecutor(val client: BigQueryClient, val advanceTimeout: Long
 
   def toColumns(result: TableResult): Option[Seq[BatchColumn]] = {
     Option(result.getSchema).map { schema =>
-      schema.getFields.asScala.map(f => BatchColumn(f.getName))
+      schema.getFields.asScala.toSeq.map(f => BatchColumn(f.getName))
     }
   }
 

@@ -7,7 +7,7 @@ import monix.eval.Task
 import quix.api.execute._
 import quix.core.utils.TaskOps._
 
-import scala.collection.mutable.ListBuffer
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.concurrent.duration._
 
 case class JdbcConfig(url: String,
@@ -43,7 +43,7 @@ class JdbcQueryExecutor(config: JdbcConfig)
         rows += row
       } while (!query.isCancelled && rows.size < config.batchSize && rs.next())
 
-      Batch(rows, Some(columns))
+      Batch(rows.toSeq, Some(columns))
     }
 
   def drainResultSet(query: ActiveQuery[String],

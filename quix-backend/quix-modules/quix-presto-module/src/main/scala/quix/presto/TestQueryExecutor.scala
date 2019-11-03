@@ -96,14 +96,14 @@ class TestQueryExecutor extends AsyncQueryExecutor[String, Batch] {
 
   override def runTask(query: ActiveQuery[String], builder: Builder[String, Batch]): Task[Unit] = {
     for {
-      _ <- Task.eval(resultBuilder = builder)
-      execution <- Task.eval(executions.dequeue())
+      _ <- Task.eval(this.resultBuilder = builder)
+      execution <- Task.eval(this.executions.dequeue())
       _ <- execution.act(query, builder)
     } yield ()
   }
 
   def clear = {
-    executions.clear()
+    this.executions.clear()
     this
   }
 }

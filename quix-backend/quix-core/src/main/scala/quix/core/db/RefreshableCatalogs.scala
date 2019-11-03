@@ -11,7 +11,7 @@ class RefreshableCatalogs(catalogs: Catalogs,
                           var state: State[List[Catalog]] = State(Nil, 0L)) {
 
   def get: Task[List[Catalog]] = {
-    state match {
+    this.state match {
       case State(data, _) if data.isEmpty =>
         for {
           _ <- startUpdate()
@@ -40,12 +40,12 @@ class RefreshableCatalogs(catalogs: Catalogs,
   }
 
   def startUpdate() = {
-    Task(state = state.copy(expirationDate = System.currentTimeMillis() + staleThreshold))
+    Task(this.state = this.state.copy(expirationDate = System.currentTimeMillis() + staleThreshold))
   }
 
   def update(newCatalogs: List[Catalog]) = {
     Task {
-      state = state.copy(data = newCatalogs)
+      this.state = this.state.copy(data = newCatalogs)
       newCatalogs
     }
   }
